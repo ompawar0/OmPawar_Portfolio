@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-main: #050505;
+    --text-main: #f1f5f9;
+  }
+
+  html.light {
+    --bg-main: #f8fafc;
+    --text-main: #0f172a;
+  }
+
+  html.dark {
+    --bg-main: #050505;
+    --text-main: #f1f5f9;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    cursor: none; /* Hide default cursor globally — replaced by CustomCursor */
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Restore pointer cursor for interactive elements */
+  a, button, [data-cursor], input, textarea, select {
+    cursor: none;
+  }
+
+  /* Custom Smooth Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-main);
+  }
+  html.dark ::-webkit-scrollbar-thumb {
+    background: #1e1e26;
+    border-radius: 9999px;
+  }
+  html.dark ::-webkit-scrollbar-thumb:hover {
+    background: #2e2e3a;
+  }
+  html.light ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+  }
+  html.light ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+}
+
+/* ─── Scroll-Reveal Animations ─────────────────── */
+@layer utilities {
+
+  /* Base state: hidden before reveal */
+  [data-reveal] {
+    opacity: 0;
+    will-change: opacity, transform;
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Fade-only reveal */
+  [data-reveal].reveal-fade {
+    transform: none;
+  }
+
+  /* Slide-up reveal */
+  [data-reveal].reveal-up {
+    transform: translateY(32px);
+  }
+
+  /* Slide-left reveal */
+  [data-reveal].reveal-left {
+    transform: translateX(-32px);
+  }
+
+  /* Slide-right reveal */
+  [data-reveal].reveal-right {
+    transform: translateX(32px);
+  }
+
+  /* Revealed state */
+  [data-reveal].revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── Radial glow gradients ── */
+  .bg-radial-hero {
+    background: radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.08) 0%, rgba(168, 85, 247, 0.04) 35%, transparent 70%);
+  }
+
+  /* ── Glassmorphism ── */
+  .glass-card {
+    background: rgba(13, 13, 17, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-card-hover {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .glass-card-hover:hover {
+    background: rgba(20, 20, 26, 0.8);
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 20px -5px rgba(56, 189, 248, 0.15);
+  }
+
+  /* ── Grid Pattern ── */
+  .bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  }
+}
+
